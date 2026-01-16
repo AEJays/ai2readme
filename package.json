@@ -1,11 +1,11 @@
 {
-  "name": "project2md",
+  "name": "ai2readme",
   "version": "1.0.0",
   "description": "该项目可以帮你把项目内容做整合，并生成markdown",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "project2md": "index.js"
+    "ai2readme": "index.js"
   },
   "scripts": {
     "generate": "node index.js generate",

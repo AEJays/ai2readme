@@ -1,4 +1,4 @@
-<h1 align="center">project2md</h1>
+<h1 align="center">ai2readme</h1>
 
 <p align="center">Automatically generate project documentation to boost developer efficiency 🚀</p>
 
