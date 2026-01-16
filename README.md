@@ -43,9 +43,13 @@
 
 <video src="./readme-resources/video/generate.mp4">生成操作视频</video>
 
+[生成视频打开](./readme-resources/video/generate.mp4)
+
 翻译视频如下
 
 <video src="./readme-resources/video/translate.mp4">翻译操作视频</video>
+
+[翻译视频打开](./readme-resources/video/translate.mp4)
 
 ## 获取方法
 ```bash
