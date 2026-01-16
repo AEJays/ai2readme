@@ -1,0 +1,26 @@
+{
+  "name": "project2md",
+  "version": "1.0.0",
+  "description": "该项目可以帮你把项目内容做整合，并生成markdown",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "project2md": "index.js"
+  },
+  "scripts": {
+    "generate": "node index.js generate",
+    "translate": "node index.js translate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AEdge/project2md.git"
+  },
+  "author": "AEdge",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "fs-extra": "^11.3.3",
+    "ignore": "^7.0.5",
+    "openai": "^6.16.0"
+  }
+}

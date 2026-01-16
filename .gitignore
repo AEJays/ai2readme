@@ -1,0 +1,6 @@
+log/*
+package-lock.json
+node_modules/
+.env
+.gitkeep
+.ai2readme
