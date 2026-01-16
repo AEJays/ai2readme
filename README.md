@@ -27,7 +27,7 @@
 
 2. README 不同的模块分析用了不同的提示词进行AI分析，现在使用的模块经过较多的测试，你也可以替换成你自己比较适用的提示词，根据自己的模块，也可以自己添加模块
 
-3. project2md generate 里的主文件，我这边默认使用 package.json 的 main 字段做了处理 一般来说 其他类型的代码可能没有 package.json 所以我这边做了可配置 js 项目可能会舒服一点使用  然后名字也是默认获取的 package.json 的 name 字段 除非说你项目没有 那么则会获取你文件夹的名称 --config 模式 大部分是给后端用的 前端也可以用 你只要指定配置文件即可（需要的时候 他会读取你的配置文件给到大模型）
+3. ai2readme generate 里的主文件，我这边默认使用 package.json 的 main 字段做了处理 一般来说 其他类型的代码可能没有 package.json 所以我这边做了可配置 js 项目可能会舒服一点使用  然后名字也是默认获取的 package.json 的 name 字段 除非说你项目没有 那么则会获取你文件夹的名称 --config 模式 大部分是给后端用的 前端也可以用 你只要指定配置文件即可（需要的时候 他会读取你的配置文件给到大模型）
 
 4. 我这边所有的开发都是基于 glm-4.6v-flash 生成的，如果你替换的话，或者使用ollama本地模型，请自行测试
 
@@ -62,11 +62,11 @@ npm install -g .
 2. 启动项目（运行命令）
 ```bash
 # 生成项目 README 文档（默认命令）
-project2md generate <targetDir> [mainFile]
+ai2readme generate <targetDir> [mainFile]
 # 翻译已生成的 README 为英文
-project2md translate <targetDir>
+ai2readme translate <targetDir>
 # 显示帮助信息
-project2md help
+ai2readme help
 
 ```
 
@@ -92,7 +92,7 @@ project2md help
   ```
 
 2. **运行命令**  
-   使用 `project2md` 命令，支持以下子命令：
+   使用 `ai2readme` 命令，支持以下子命令：
    - `generate`：生成项目 README
    - `translate`：翻译已生成的 README 为英文
    - `help`：显示帮助信息
@@ -100,25 +100,25 @@ project2md help
 #### 启动命令示例
 - **默认生成当前目录的 README**：  
   ```bash
-  project2md generate
+  ai2readme generate
   ```
 - **指定目标目录和主文件**：  
   ```bash
-  project2md generate ./my-project src/index.js
+  ai2readme generate ./my-project src/index.js
   ```
 - **翻译已生成的 README 读取中文 README => 英文 README 只读取 ./my-project/README.md**：  
   ```bash
-  project2md translate ./my-project
+  ai2readme translate ./my-project
   ```
 
 #### 交互示例
 1. **显示帮助信息**：  
    ```bash
-   project2md
+   ai2readme
    ```
    输出：  
    ```
-   Usage: project2md <command> [arguments] [options]
+   Usage: ai2readme <command> [arguments] [options]
    Commands:
      generate              生成项目 README 文档 (默认命令)
      translate             翻译已生成的 README 为英文
@@ -129,16 +129,16 @@ project2md help
    Options:
      --config <file>       指定配置文件路径（可选，一般用于确定某个项目的配置有哪些）
    Examples:
-     project2md
-     project2md generate ./my-project src/index.js
-     project2md translate ./my-project
-     project2md help
-     project2md --help
+     ai2readme
+     ai2readme generate ./my-project src/index.js
+     ai2readme translate ./my-project
+     ai2readme help
+     ai2readme --help
    ```
 
 2. **运行生成命令后的输出**：  
    ```bash
-   project2md generate ./my-project
+   ai2readme generate ./my-project
    ```
    输出：  
    ```

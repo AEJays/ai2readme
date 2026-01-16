@@ -27,7 +27,7 @@ This project helps you integrate project content and generate markdown.
 
 2. Different modules of README are analyzed using different prompts for AI analysis. The modules currently in use have been tested extensively, and you can replace them with prompts that are more suitable for you. Based on your modules, you can also add your own modules.
 
-3. The main file in `project2md generate` is handled by default using the `main` field from `package.json`. Other types of code may not have a `package.json`, so I made it configurable for JavaScript projects to make them more comfortable to use. The name is also defaulted to the `name` field from `package.json` unless your project doesn't have one, in which case it will get the folder name. The `--config` mode is mostly for backend use but can also be used by frontend - you just need to specify the configuration file (it will read your configuration file for the large model when needed).
+3. The main file in `ai2readme generate` is handled by default using the `main` field from `package.json`. Other types of code may not have a `package.json`, so I made it configurable for JavaScript projects to make them more comfortable to use. The name is also defaulted to the `name` field from `package.json` unless your project doesn't have one, in which case it will get the folder name. The `--config` mode is mostly for backend use but can also be used by frontend - you just need to specify the configuration file (it will read your configuration file for the large model when needed).
 
 4. All development here is based on `glm-4.6v-flash` generation. If you replace it or use the local ollama model, please test it yourself.
 
@@ -62,11 +62,11 @@ npm install -g .
 2. Start the project (run command)
 ```bash
 # Generate project README document (default command)
-project2md generate <targetDir> 
+ai2readme generate <targetDir> 
 # Translate the generated README to English
-project2md translate <targetDir>
+ai2readme translate <targetDir>
 # Display help information
-project2md help
+ai2readme help
 ```
 
 ## How to Use
@@ -91,7 +91,7 @@ project2md help
    ```
 
 2. **Run commands**  
-   Use the `project2md` command, supporting the following subcommands:
+   Use the `ai2readme` command, supporting the following subcommands:
    - `generate`: Generate project README
    - `translate`: Translate the generated README to English
    - `help`: Display help information
@@ -99,25 +99,25 @@ project2md help
 #### Command Examples
 - **Default generate README for current directory**:  
   ```bash
-  project2md generate
+  ai2readme generate
   ```
 - **Specify target directory and main file**:  
   ```bash
-  project2md generate ./my-project src/index.js
+  ai2readme generate ./my-project src/index.js
   ```
 - **Translate generated README (reads Chinese README => English README, only reads ./my-project/README.md)**:  
   ```bash
-  project2md translate ./my-project
+  ai2readme translate ./my-project
   ```
 
 #### Interactive Examples
 1. **Display help information**:  
    ```bash
-   project2md
+   ai2readme
    ```
    Output:  
    ```
-   Usage: project2md <command>  
+   Usage: ai2readme <command>  
    Commands:
      generate              Generate project README document (default command)
      translate             Translate the generated README to English
@@ -128,16 +128,16 @@ project2md help
    Options:
      --config <file>       Specify configuration file path (optional, generally used to determine what configurations a project has)
    Examples:
-     project2md
-     project2md generate ./my-project src/index.js
-     project2md translate ./my-project
-     project2md help
-     project2md --help
+     ai2readme
+     ai2readme generate ./my-project src/index.js
+     ai2readme translate ./my-project
+     ai2readme help
+     ai2readme --help
    ```
 
 2. **Output after running the generate command**:  
    ```bash
-   project2md generate ./my-project
+   ai2readme generate ./my-project
    ```
    Output:  
    ```

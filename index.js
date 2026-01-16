@@ -14,7 +14,7 @@ const
 * */
 showHelp = () => {
   console.log(`
-Usage: project2md <command> [arguments] [options]
+Usage: ai2readme <command> [arguments] [options]
 
 Commands:
   generate              生成项目 README 文档 (默认命令)
@@ -30,17 +30,17 @@ Options:
 
 Examples:
   # 分析当前目录并生成 README
-  project2md
+  ai2readme
 
   # 指定目录和主文件生成 README
-  project2md generate ./my-project src/index.js
+  ai2readme generate ./my-project src/index.js
 
   # 翻译 README
-  project2md translate ./my-project
+  ai2readme translate ./my-project
 
   # 显示帮助
-  project2md help
-  project2md --help
+  ai2readme help
+  ai2readme --help
   `);
 };
 const rawArgs = process.argv.slice(2);
