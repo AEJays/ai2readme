@@ -1,6 +1,10 @@
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config();
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 const AI_PROVIDER = process.env.AI_PROVIDER || 'zhipu';
 export const CONFIG = {
   // 项目根目录路径
