@@ -1,6 +1,6 @@
 {
   "name": "ai2readme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "该项目可以帮你把项目内容做整合，并生成markdown",
   "type": "module",
   "main": "index.js",

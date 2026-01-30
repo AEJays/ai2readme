@@ -232,9 +232,15 @@ export async function generateReadme(structure, codeContext) {
   console.log(`✅ 成功生成: ${zhPath}`);
   console.log('📊 生成内容长度: ' + zhContent.length + ' 字符');
   await logReadmeGeneration(zhContent, '中文', zhContent.length);
+  // 重新润色
+  await refineReadme(zhPath);
+  console.log("✅ 重新润色完成")
+  // 重新读取一下内容
   if (CONFIG.generateEnglish) {
     try {
-      const enContent = await translateToEnglish(zhContent, projectRoot);
+      // 获取润色后的内容给到英文翻译
+      let finalzhContent = await fs.readFile(zhPath, 'utf8');
+      const enContent = await translateToEnglish(finalzhContent, projectRoot);
       const enPath = path.join(outputDir, 'README_EN.md');
       await fs.writeFile(enPath, enContent, 'utf8');
       console.log(`✅ 成功生成英文翻译: ${enPath}`);
@@ -244,4 +250,75 @@ export async function generateReadme(structure, codeContext) {
       await logError(error, '翻译 README 为英文');
     }
   }
+}
+
+/** 
+* @author AEdge
+* @description 读取已生成的 README，进行 AI 润色去重（保持子标题结构不变）
+* @param {string} readmePath - README 文件路径
+* @returns Promise<void>
+*/
+export async function refineReadme(readmePath) {
+  console.log('🔧 正在读取并优化 README 内容（去重与润色）...');
+  
+  try {
+    // 1. 读取文件
+    const content = await fs.readFile(readmePath, 'utf8');
+    
+    // 2. 动态导入 Prompt 函数
+    const { getRefineReadmePrompt } = await import('./prompts/zh.js');
+    const { SYSTEM_PROMPT } = await import('./prompts/zh.js');
+    
+    // 3. 构建 Prompt 并调用 AI
+    const prompt = getRefineReadmePrompt(content);
+    
+    // 4. 获取优化后的内容
+    let refinedContent = await callAI(prompt, SYSTEM_PROMPT);
+    
+    // 简单清理：如果 AI 把结果包在 \`\`\`markdown 里，去掉外壳
+    refinedContent = refinedContent.trim();
+    if (refinedContent.startsWith('```markdown')) {
+      refinedContent = refinedContent.replace(/^```markdown\n/, '').replace(/\n```$/, '');
+    } else if (refinedContent.startsWith('```')) {
+      refinedContent = refinedContent.replace(/^```\n/, '').replace(/\n```$/, '');
+    }
+    
+    // === 【新增】5. 强制检查并补全代码块 ===
+    refinedContent = ensureCodeBlocksClosed(refinedContent);
+    // ========================================
+    
+    // 6. 写回文件
+    await fs.writeFile(readmePath, refinedContent, 'utf8');
+    console.log('✅ README 优化完成，已更新文件');
+    
+  } catch (error) {
+    console.error('💥 README 优化失败:', error);
+  }
+}
+/**
+ * @author AEdge
+ * @description 强制检查并补全未闭合的 Markdown 代码块
+ * @param {string} text - 待检查文本
+ * @returns string
+ */
+function ensureCodeBlocksClosed(text) {
+  const lines = text.split('\n');
+  let inCodeBlock = false;
+  
+  // 遍历每一行，检查代码块开关状态
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    // 检查行是否为代码块标记 (``` 或 ```language)
+    if (line.startsWith('```')) {
+      inCodeBlock = !inCodeBlock;
+    }
+  }
+  // 如果结束时仍然处于代码块内部，说明未闭合，强制补全
+  if (inCodeBlock) {
+    console.log('  🔧 检测到未闭合的代码块，自动补全 ```');
+    // 去除末尾可能的空白，然后加换行和闭合标记
+    return text.trimEnd() + '\n```';
+  }
+  
+  return text;
 }
