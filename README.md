@@ -119,7 +119,7 @@ $ ai2readme translate ./demo-project
 | `openai` | ^6.16.0 | 处理与 OpenAI 的 API 交互，调用大语言模型 |
 | `dotenv` | ^17.2.3 | 从 `.env` 文件加载环境变量，配置敏感信息 |
 | `fs-extra` | ^11.3.3 | 扩展 Node.js 原生文件系统模块，提供更便捷的文件读写操作 |
-| `ignore` | ^7.0.5 | 基于规则过滤文件与目录，支持 `.gitignore` 语法 |
+
 
 ## 项目结构
 
